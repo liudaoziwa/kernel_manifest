@@ -36,8 +36,12 @@ jobs:
       run: |
         sudo apt update && sudo apt upgrade -y
         sudo apt install curl git python3 -y
-    - name : 查看配置
+    - name : 创建swap
       run: |
+        sudo dd if=/dev/zero of=./extswap bs=1G count=64
+        sudo chmod 0600 ./extswap
+        sudo mkswap ./extswap
+        sudo swapon ./extswap
         df -h
         free -h
     - name: 拉取oneplus ace3内核清单
