@@ -77,6 +77,9 @@ jobs:
            patch -p1 --fuzz=3 < ./core_hook.c_fix.patch
            cp ../kernel_patches/selinux.c_fix.patch ./
            patch -p1 -F 3 < selinux.c_fix.patch
+           cp ../kernel_patches/Makefile_fix.patch ./
+           patch -p1 -F 3 < Makefile_fix.patch
+           
            
     - name: 编译内核
       run: |
