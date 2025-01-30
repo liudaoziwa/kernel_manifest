@@ -25,8 +25,8 @@ jobs:
 
     - name: Configure Git
       run: |
-         git config --global user.name "Yxiguan"
-         git config --global user.email "2501608779@qq.com"
+         git config --global user.name "liudaoziwa"
+         git config --global user.email "2496058326@qq.com"
     
     - name: 安装repo
       run: |
@@ -42,13 +42,13 @@ jobs:
     - name: 拉取oneplus 12内核清单
       run: |
         mkdir kernel && cd kernel
-        repo init -u https://github.com/OnePlusOSS/kernel_manifest.git -b oneplus/sm8650 -m oneplus12_v.xml --depth=1
+        repo init -u https://android.googlesource.com/kernel/manifest -b common-android12-5.10 --depth=1
         repo sync -j$(nproc --all)
-        sed -i 's/export REPACK_IMG=true/export REPACK_IMG=false/Ig' kernel_platform/oplus/build/oplus_setup.sh
-        sed -i 's/ -dirty$//' kernel_platform/common/scripts/setlocalversion
-        sed -i 's/ -dirty$//' kernel_platform/msm-kernel/scripts/setlocalversion
-        sed -i '1a CONFIG_LOCALVERSION="-XiGuan"' kernel_platform/common/arch/arm64/configs/gki_defconfig
-        sed -i '1a CONFIG_LOCALVERSION="-XiGuan"' kernel_platform/msm-kernel/arch/arm64/configs/gki_defconfig
+        # sed -i 's/export REPACK_IMG=true/export REPACK_IMG=false/Ig' kernel_platform/oplus/build/oplus_setup.sh
+        # sed -i 's/ -dirty$//' kernel_platform/common/scripts/setlocalversion
+        # sed -i 's/ -dirty$//' kernel_platform/msm-kernel/scripts/setlocalversion
+        # sed -i '1a CONFIG_LOCALVERSION="-XiGuan"' kernel_platform/common/arch/arm64/configs/gki_defconfig
+        # sed -i '1a CONFIG_LOCALVERSION="-XiGuan"' kernel_platform/msm-kernel/arch/arm64/configs/gki_defconfig
         # sed -i 's/BUILD_VENDOR_DLKM=1/BUILD_VENDOR_DLKM=0/; s/BUILD_INIT_BOOT_IMG=1/BUILD_INIT_BOOT_IMG=0/' kernel_platform/msm-kernel/build.config.msm.pineapple
         # sed -i 's/BUILD_SYSTEM_DLKM=1/BUILD_SYSTEM_DLKM=0/' kernel_platform/common/build.config.gki.aarch64
 
@@ -60,7 +60,7 @@ jobs:
     - name: 添加SUSFS
       run: |
            cd kernel
-           git clone https://gitlab.com/simonpunk/susfs4ksu.git -b gki-android14-6.1
+           git clone https://gitlab.com/simonpunk/susfs4ksu.git -b gki-android12-5.10
            git clone https://github.com/TheWildJames/kernel_patches.git
            cd kernel_platform
            cp ../susfs4ksu/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ./common/KernelSU-Next/
