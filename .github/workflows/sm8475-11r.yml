@@ -81,6 +81,10 @@ jobs:
     - name: 编译内核
       run: |
         cd kernel
+        cd common
+        sed -i '779s/^/#/' Makefile
+        sed -i '1006s/^/#/' Makefile
+        cd ..
         export LTO=thin
         #./kernel_platform/oplus/build/oplus_build_kernel.sh waipio gki
         echo "function check_defconfig() { return 0; }">>build/_setup_env.sh
