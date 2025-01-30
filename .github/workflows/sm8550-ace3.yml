@@ -88,6 +88,7 @@ jobs:
       run: |
         cd kernel
         export  LTO=full
+        export  MAKEFLAGS += -j1
         ./kernel_platform/oplus/build/oplus_build_kernel.sh kalama gki
         cat kernel_platform/out/msm-kernel-kalama-gki/gki_kernel/common/include/config/kernel.release
         
